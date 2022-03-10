@@ -2,102 +2,128 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <title>🤘 Shortly — Shorter Links, Longer Lives</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shortly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="/favicon.png">
   </head>
   <body>
     <nav>
-       <a class="logo brand" href="#">Shortly</a>
-       <ul>
-         <li><a href="#">Features</a></li>
-         <li><a href="#">Pricing</a></li>
-         <li><a href="#">Resources</a></li>
-       </ul>
-       <div>
-         <a class="button text round" href="#">Login</a>
-         <a class="button filled round" href="#">Sign Up</a>
-       </div>
+      <div class="content">
+        <a class="logo" href="#">
+          <img src="/assets/logo.svg" />
+        </a>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+        <div>
+          <a class="button text round" href="#">Login</a>
+          <a class="button filled round" href="#">Sign Up</a>
+        </div>
+      </div>
     </nav>
     <header>
-      <h1>More than just shorter links.</h1> 
-      <p>Build your brand's recognition and get detailed insights on how your links are performing.</p>
-      <div>
-        <a class="button filled round" href="#">Get Started</a>
+      <div class="content">
+        <h1>More than just shorter links.</h1> 
+        <p>Build your brand's recognition and get detailed insights on how your links are performing.</p>
+        <div>
+          <a class="button filled round" href="#">Get Started</a>
+        </div>
       </div>
     </header>
-    <section class="header cta">
-      <div class="content">
-        <input type="text" name="url" value="" placeholder="Shorten a link here..." />
-        <a class="button filled square" href="#">Shorten it!</a>
+    <main>
+      <div>
+        <form id="form-shorten">
+          <input type="url" name="url" value="" required placeholder="Shorten a link here..." />
+          <input type="submit" class="button filled square" value="Shorten it!">
+        </form>
       </div>
-    </section>
+    </main>
+    <section id="shorten-results" ></section>
     <section class="cards">
       <h2>Advanced Statistics</h2>
       <p>Track how your links are performing across the web with our advanced statistics dashboard.</p>
-        <div class="card container">
+      <div class="container">
+        <article class="card container">
           <div class="icon container">
-            <img class="icon" src="/assets/icon-brand-recognition.svg" />
+            <img class="icon" alt="" src="/assets/icon-brand-recognition.svg" />
           </div>
-          <div class="content container">
+          <header class="content container">
             <h3>Brand Recognition</h3> 
             <p>Build your brand recognition with each click. Generic links don't mean a thing. Branded links help instill confidence in your content.</p>
-          </div>
-        </div>
-        <div class="card container">
+          </header>
+        </article>
+        <article class="card container">
           <div class="icon container">
-            <img class="icon" src="/assets/icon-detailed-records.svg" />
+            <img class="icon" alt="" src="/assets/icon-detailed-records.svg" />
           </div>
-          <div class="content container">
+          <header class="content container">
             <h3>Detailed Records</h3> 
             <p>Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.</p>
-          </div>
-        </div>
-        <div class="card container">
+          </header>
+        </article>
+        <article class="card container">
           <div class="icon container">
-            <img class="icon" src="/assets/icon-fully-customizable.svg" />
+            <img class="icon" alt="" src="/assets/icon-fully-customizable.svg" />
           </div>
-          <div class="content container">
+          <header class="content container">
             <h3>Fully Customizable</h3> 
             <p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
-          </div>
-        </div>
+          </header>
+        </article>
+      </div>
     </section>
-    <section class="cta boost">
+    <section class="cta">
       <h2>Boost your links today</h2>
       <div>
         <a class="button filled round" href="#">Get Started</a>
       </div>
     </section>
     <footer>
-      <h3>Shortly</h3>
-      <ul>
-        <h4>Features</h4>
-        <li><a href="#">Link Shortening</a></li>
-        <li><a href="#">Branded links</a></li>
-        <li><a href="#">Analytics</a></li>
-      </ul>
-      <ul>
-        <h4>Resources</h4>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Developers</a></li>
-        <li><a href="#">Support</a></li>
-      </ul>
-      <ul>
-        <h4>About</h4>
-        <li><a href="#">Our Team</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <div class="icons container">
-        <img class="icon" src="/assets/icon-facebook.svg" />
-        <img class="icon" src="/assets/icon-twitter.svg" />
-        <img class="icon" src="/assets/icon-pinterest.svg" />
-        <img class="icon" src="/assets/icon-instagram.svg" />
+      <div class="content">
+        <div>
+          <img src="/assets/logo-white.svg" alt="Shortly"/>
+        </div>
+        <article>
+          <h4>Features</h4>
+          <ul>
+            <li><a href="#">Link Shortening</a></li>
+            <li><a href="#">Branded links</a></li>
+            <li><a href="#">Analytics</a></li>
+          </ul>
+        </article>
+        <article>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Developers</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </article>
+        <article>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </article>
+
+
+        <div class="icons container">
+          <span class="icon facebook" ></span>
+          <span class="icon twitter" ></span>
+          <span class="icon pinterest" ></span>
+          <span class="icon instagram" ></span>
+        </div>
       </div>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>
