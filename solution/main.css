@@ -419,6 +419,10 @@ footer .content {
   column-gap: 3rem;
 }
 
+footer .logo {
+  display: block;
+}
+
 footer a {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.8);
@@ -449,13 +453,13 @@ footer ul li:not(:last-of-type) {
 }
 
 footer .icons.container {
-  display: flex;
-  flex-direction: row;
-  color: red;
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  column-gap: 2rem;
+  row-gap: 2rem;
 }
 
 footer .icon {
-  display: inline-block;
   height: 1.5rem;
   width: 1.5rem;
   background-size: contain;
@@ -495,7 +499,29 @@ footer .icon {
   background-image: url(/assets/icon-instagram-hover.svg);
 }
 
-footer .icon:not(:last-of-type) {
-  margin-right: 1rem;
+@media (max-width: 1024px) {
+  footer .content {
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    row-gap: 3rem;
+    text-align: center;
+  }
+
+  footer .logo {
+    grid-column: 1 / 4;
+  }
+
+  footer .icons {
+    grid-column: 1 / 4;
+  }
 }
 
+@media (max-width: 550px) {
+  footer .content {
+    grid-template-columns: 1fr;
+  }
+
+  footer .content > * {
+    grid-column: 1 / 2;
+  }
+}
