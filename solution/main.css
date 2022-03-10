@@ -421,6 +421,7 @@ section.cta {
 
 section.cta h2 {
   color: white;
+  text-align: center;
   font-size: 2rem;
   margin-top: 0rem;
 }
@@ -613,6 +614,9 @@ footer .icon {
 @media (max-width: 900px) {
   main #shorten-form {
     padding: 1.5rem;
+    background-image: url(/assets/bg-shorten-mobile.svg);
+    /* Stretch background to fill*/
+    background-size: 100% 100%;
   }
 
   #shorten-results article {
@@ -639,6 +643,11 @@ footer .icon {
 
     margin-left: -1.25rem;
     margin-right: -1.25rem;
+  }
+
+  section.cta {
+    background-image: url(/assets/bg-boost-mobile.svg);
+    background-size: 100% 100%;
   }
 }
 
@@ -737,5 +746,9 @@ footer .icon {
 @media (max-width: 400px) {
   nav + header h1 {
     font-size: 2.35rem;
+  }
+
+  #shorten-form input[type=url] {
+    min-width: 0rem;
   }
 }
