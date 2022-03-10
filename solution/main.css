@@ -165,6 +165,13 @@ nav ul li a:hover {
   color: var(--p-dark-violet);
 }
 
+nav .menu.mobile {
+  display: none;
+  height: 2rem;
+  width: 2rem;
+  justify-self: end;
+}
+
 header {
   background-image: url('/assets/illustration-working.svg');
   background-repeat: no-repeat;
@@ -500,6 +507,19 @@ footer .icon {
 }
 
 @media (max-width: 1024px) {
+  nav .content {
+    grid-template-columns: auto auto;
+  }
+
+  nav .menu.mobile {
+    display: flex;
+  }
+
+  nav ul,
+  .menu.desktop {
+    display: none;
+  }
+
   footer .content {
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
