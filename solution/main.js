@@ -1,27 +1,49 @@
 const baseUrl = 'https://api.shrtco.de/v2/shorten';
+
 const storageKey = 'shortly-urls';
 const storage = window.localStorage;
+
+const formId = 'form-shorten';
 const resultListId = 'shorten-results';
+const errorElemId = 'error-message';
+
 let shortenedUrls = [];
 let timeouts = {};
 
+const elemById = (id) => {return document.getElementById(id)};
+
 const handleSubmit = (event) => {
   event.preventDefault();
-  const formElement = document.getElementById('form-shorten');
+
+  const formElement = elemById(formId);
   const formData = new FormData(formElement);
   const url = formData.get('url');
 
-
   shortenLink(url).then(data => {
-    shortenedUrls = shortenedUrls.concat({
-      timestamp: new Date(),
-      longUrl: url,
-      shortUrl: data.result.full_short_link,
-    })
+    if (data.ok) {
+      shortenedUrls = shortenedUrls.concat({
+        timestamp: new Date(),
+        longUrl: url,
+        shortUrl: data.result.full_short_link,
+      })
 
-    updateResultList()
+      updateResultList()
+    } else {
+      const errorElement = elemById(errorElemId);
+
+      if (data.error) {
+        // Dangerously (XSS) set innerHTML.
+        errorElement.innerHTML = `<p>${data.error}</p>`;
+      }
+    }
   });
 }
+
+const bindFormSubmit = () => {
+  const formElement = elemById(formId);
+  formElement.addEventListener('submit', handleSubmit);
+}
+
 
 const shortenLink = async (url) => {
   const response = await fetch(`${baseUrl}?${new URLSearchParams({ url })}`, {
@@ -39,14 +61,6 @@ const shortenLink = async (url) => {
   return await response.json();
 }
 
-const clearShortenedUrls = () => {
-  shortenedUrls = []
-}
-
-const clearResultList = () => {
-  document.getElementById(resultListId).innerHTML = '';
-}
-
 const sortShortenedUrls = () => {
   let sorted = shortenedUrls
   sorted.sort((a,b) => {
@@ -60,6 +74,26 @@ const sortShortenedUrls = () => {
   shortenedUrls = sorted
 }
 
+const clearShortenedUrls = () => {
+  shortenedUrls = []
+}
+
+const addResultListing = (result) => {
+  const resultsSection = elemById(resultListId);
+  const resultElement = document.createElement('article');
+
+  const longUrlElem = `<a class="link" href=${result.longUrl}>${result.longUrl}</a>`;
+  const shortUrlElem = `<a class="link" href=${result.shortUrl}>${result.shortUrl}</a>`;
+  const copyButton = `<a id="copy-${result.timestamp}" href="${result.shortUrl}" class="button filled square"></a>`;
+
+  // Dangerously set innerHTML.
+  resultElement.innerHTML = `${longUrlElem}${shortUrlElem}${copyButton}`;
+  resultsSection.appendChild(resultElement);
+
+  const copyButtonElem = elemById(`copy-${result.timestamp}`);
+  copyButtonElem.addEventListener('click', handleCopyClick);
+}
+
 const updateResultList = () => {
   sortShortenedUrls()
   clearResultList();
@@ -68,14 +102,17 @@ const updateResultList = () => {
   });
 }
 
-const addCopiedStatus = (id) => {
-  document.getElementById(id).classList.add('copied');
+const clearResultList = () => {
+  elemById(resultListId).innerHTML = '';
 }
 
-const removeCopiedStatus = (id) => {
-  document.getElementById(id).classList.remove('copied');
+const addCopiedClass = (id) => {
+  elemById(id).classList.add('copied');
 }
 
+const removeCopiedClass = (id) => {
+  elemById(id).classList.remove('copied');
+}
 
 const handleCopyClick = (e) => {
   e.preventDefault();
@@ -88,10 +125,10 @@ const handleCopyClick = (e) => {
     delete timeouts[id];
   }
 
-  addCopiedStatus(id)
+  addCopiedClass(id)
 
   timeouts[id] = setTimeout(() => {
-    removeCopiedStatus(id)
+    removeCopiedClass(id)
 
     // Remove reference to timeout as we finish.
     delete timeouts[id];
@@ -99,19 +136,6 @@ const handleCopyClick = (e) => {
   }, 1500);
 
   navigator?.clipboard?.writeText(e.target.href);
-}
-
-const addResultListing = (result) => {
-  const resultsSection = document.getElementById(resultListId);
-  const resultElement = document.createElement('article');
-  const longUrlElem = `<a class="link" href=${result.longUrl}>${result.longUrl}</a>`;
-  const shortUrlElem = `<a class="link" href=${result.shortUrl}>${result.shortUrl}</a>`;
-  const copyButton = `<a id="copy-${result.timestamp}" href="${result.shortUrl}" class="button filled square"></a>`;
-  resultElement.innerHTML = `${longUrlElem}${shortUrlElem}${copyButton}`;
-  resultsSection.appendChild(resultElement);
-
-  const copyButtonElem = document.getElementById(`copy-${result.timestamp}`);
-  copyButtonElem.addEventListener('click', handleCopyClick);
 }
 
 const saveShortenedUrls = () => {
@@ -126,8 +150,7 @@ const loadShortenedUrls = async () => {
 window.onload = () => {
   loadShortenedUrls();
   updateResultList();
-  const formElement = document.getElementById('form-shorten');
-  formElement.addEventListener('submit', handleSubmit);
+  bindFormSubmit();
 }
 
 window.onbeforeunload = () => {

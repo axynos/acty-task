@@ -247,6 +247,12 @@ main form input[type=url]:placeholder-shown {
   color: var(--n-greyish-violet);
 }
 
+#error-message p {
+  color: #ff675c;
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+}
+
 #shorten-results {
   background-color: var(--n-light-gray);
   padding: 5rem 1rem 4rem 1rem;
