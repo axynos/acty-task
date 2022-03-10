@@ -144,7 +144,7 @@ const saveShortenedUrls = () => {
 
 const loadShortenedUrls = async () => {
   const data = storage.getItem(storageKey);
-  shortenedUrls = JSON.parse(data);
+  shortenedUrls = JSON.parse(data) ?? [];
 }
 
 window.onload = () => {
