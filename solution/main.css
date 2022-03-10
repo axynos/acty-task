@@ -235,6 +235,7 @@ main input[type=url] {
   border-radius: 0.5rem;
   background: white;
   position: relative;
+  min-width: 0rem;
 }
 
 input[type=url]:invalid {
@@ -746,9 +747,5 @@ footer .icon {
 @media (max-width: 400px) {
   nav + header h1 {
     font-size: 2.35rem;
-  }
-
-  #shorten-form input[type=url] {
-    min-width: 0rem;
   }
 }
