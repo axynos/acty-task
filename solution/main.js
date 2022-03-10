@@ -3,7 +3,7 @@ const baseUrl = 'https://api.shrtco.de/v2/shorten';
 const storageKey = 'shortly-urls';
 const storage = window.localStorage;
 
-const formId = 'form-shorten';
+const formId = 'shorten-form';
 const resultListId = 'shorten-results';
 const errorElemId = 'error-message';
 
